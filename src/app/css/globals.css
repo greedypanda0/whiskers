@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #1a0f11; /* Deep rose-black */
+  --foreground: #f4e9e8; /* Soft cream pink text */
+
+  --card: #2b1518; /* Dark red-brown card */
+  --card-foreground: #fbecec; /* Light creamy text */
+
+  --primary: #ff6b81; /* Blush red (main action) */
+  --primary-hover: #e65067; /* Deeper rose on hover */
+  --primary-foreground: #1a0f11; /* Text on buttons */
+
+  --secondary: #3a1f21; /* Soft dark plum */
+  --secondary-hover: #502d30; /* Slightly richer plum */
+  --secondary-foreground: #f1d6d6; /* Light text on secondary */
+
+  --muted: #2a191b; /* Near background, less contrast */
+  --muted-foreground: #c49b9c; /* Muted dusty rose */
+
+  --accent: #ff4f64; /* Bold cherry red */
+  --accent-hover: #e54256; /* Stronger cherry */
+  --accent-foreground: #ffffff; /* White on accent */
+
+  --border: #422326; /* Wine red border */
+  --input: #2c1a1d; /* Input field background */
+  --ring: #ff6b8199; /* Soft rose-glow focus ring */
+
+  --radius: 12px; /* Even cozier */
+}
+
+body {
+  font-family: var(--font-sans), sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif), serif;
+}
+
+p,
+article {
+  font-family: var(--font-serif), serif;
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+}
+
+code,
+pre {
+  font-family: var(--font-mono), monospace;
+}
