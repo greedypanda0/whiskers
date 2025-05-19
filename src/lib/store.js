@@ -6,6 +6,11 @@ const useStore = create((set) => ({
     description: "a writer app",
   },
   currentTab: "home",
+  query: "",
+  setQuery: (query) =>
+    set(() => ({
+      query: query,
+    })),
   setCurrentTab: (tab) =>
     set(() => ({
       currentTab: tab,
