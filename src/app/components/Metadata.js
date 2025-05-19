@@ -4,8 +4,6 @@ import useStore from "@/lib/store";
 
 export default function Metadata() {
   const { metadata } = useStore();
-  console.log(useStore);
-  
 
   useEffect(() => {
     document.title = metadata.title;
