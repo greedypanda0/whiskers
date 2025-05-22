@@ -1,14 +1,16 @@
 const { models, model, Schema } = require("mongoose");
 
 const User = new Schema({
+  _id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
   },
-  provider: {
-    type: String,
-    required: true,
-  },
+
+  books: [],
 });
 
 export default models.users || model("users", User);

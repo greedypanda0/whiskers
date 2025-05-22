@@ -14,15 +14,13 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
-export async function connectToDatabase() {
+async function connectToDatabase() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
     cached.promise = mongoose
       .connect(MONGODB_URI, {
         bufferCommands: false,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
       })
       .then((mongoose) => {
         console.log("🍃 Connected to MongoDB");
@@ -33,3 +31,14 @@ export async function connectToDatabase() {
   cached.conn = await cached.promise;
   return cached.conn;
 }
+
+function sanitizeMongoDoc(doc) {
+  if (Array.isArray(doc)) {
+    return doc.map(sanitizeMongoDoc);
+  }
+
+  const { _id, __v, ...rest } = doc;
+  return rest;
+}
+
+export { connectToDatabase, sanitizeMongoDoc };

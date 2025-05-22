@@ -33,11 +33,11 @@ export default function ListBooks({ books }) {
 
   return (
     <div
-      className="grid grid-cols-[repeat(auto-fill,_minmax(170px,_1fr))] gap-2 w-full p-2 overflow-auto h-full"
+      className="grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] w-full h-fit overflow-auto gap-2 p-2"
     >
       {books.slice(0, visibleCount).map((book) => (
         <motion.div
-          key={book.id}
+          key={book.name}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}

@@ -5,27 +5,43 @@ import Footer from "../components/Footer";
 import clsx from "clsx";
 import Stared from "../components/Stared";
 import MyBooks from "../components/MyBooks";
-import { BookA, Search, Star } from "lucide-react";
+import { BookA, Plus, Search, Star } from "lucide-react";
 import useStore from "@/lib/store";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const tabs = [
   {
     name: "My Books",
-    componenet: MyBooks,
+    component: MyBooks,
     icon: BookA,
   },
   {
     name: "Stared",
-    componenet: Stared,
+    component: Stared,
     icon: Star,
   },
 ];
 
-export default function Libraray() {
+export default function Library() {
   const [tab, setTab] = useState("My Books");
   const [isSearchOpen, setSearchOpen] = useState(false);
   const { setQuery } = useStore();
+  const router = useRouter();
+
+  async function handleNewBook() {
+    let res = await fetch("/api/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    }).then((res) => res.json());
+
+    console.log(res);
+
+    return router.push(`books/${res.name}`);
+  }
 
   return (
     <main className="fixed flex flex-col md:flex-row w-full h-full">
@@ -49,7 +65,7 @@ export default function Libraray() {
         </div>
 
         {/* Search bar */}
-        <div className="w-full h-16 flex flex-row items-center ml-2.5 gap-2">
+        <div className="w-full h-16 flex flex-row items-center pl-2.5 pr-2.5 gap-2">
           <motion.div
             layout
             initial={false}
@@ -70,6 +86,16 @@ export default function Libraray() {
             size={20}
             onClick={() => setSearchOpen(!isSearchOpen)}
           />
+
+          <div
+            className={clsx(
+              "w-[150px] flex flex-col bg-[var(--primary)] justify-center items-center rounded-2xl ml-auto py-2.5",
+              tab !== "My Books" ? "hidden" : ""
+            )}
+            onClick={() => handleNewBook()}
+          >
+            <Plus />
+          </div>
         </div>
 
         {/* Tab content */}
@@ -85,7 +111,7 @@ export default function Libraray() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <e.componenet />
+                  <e.component />
                 </motion.div>
               ) : null
             )}
