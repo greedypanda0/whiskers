@@ -28,7 +28,7 @@ export async function POST(req) {
   await connectToDatabase();
 
   const body = await req.json();
-  const id = body.id;
+  const name = body.name;
 
   const session = await getSession();
   const userId = session?.user?.id;
@@ -36,7 +36,7 @@ export async function POST(req) {
   const user = await User.findById(userId);
   if (!user) return json({ message: "no user" }, false);
 
-  if (!id) {
+  if (!name) {
     const newBook = new Book({
       name: "book_" + getRandomId(),
       description: "new book",
@@ -55,7 +55,25 @@ export async function POST(req) {
     );
   }
 
-  return json({ message: "id already exists or not handled yet" }, false);
+  let updates = body.updates;
+  let book = await Book.findOne({ name });
+  if (!book)
+    return json(
+      {
+        message: "no book found",
+      },
+      false
+    );
+
+  Object.entries(updates).forEach(([key, value]) => (book[key] = value));
+
+  await book.save();
+  let dataToSend = book.lean();
+  dataToSend = sanitizeMongoDoc(dataToSend);
+
+  return json({
+    book: dataToSend,
+  }, true);
 }
 
 export async function DELETE() {

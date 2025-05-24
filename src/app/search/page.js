@@ -14,8 +14,8 @@ export default function SearchPage() {
   });
 
   return (
-    <main className="fixed flex flex-col w-full h-full gap-2">
-      <div className="h-16 w-full flex flex-row items-center justify-center">
+    <main className="fixed flex flex-col w-full h-full gap-2 items-center">
+      <div className="h-16 w-full flex flex-row items-center justify-center p-2.5 md:w-[50%] gap-2.5">
         <input
           type="text"
           placeholder="(#-#)^"

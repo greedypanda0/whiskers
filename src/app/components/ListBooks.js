@@ -33,15 +33,22 @@ export default function ListBooks({ books }) {
 
   return (
     <div
-      className="grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] w-full h-fit overflow-auto gap-2 p-2"
+      className="grid grid-cols-[repeat(auto-fit,minmax(120px,max-content))] sm:grid-cols-[repeat(auto-fit,minmax(150px,max-content))] lg:grid-cols-[repeat(auto-fit,minmax(180px,max-content))] auto-rows-min w-full h-fit gap-4 p-2 sm:p-4"
     >
       {books.slice(0, visibleCount).map((book) => (
         <motion.div
           key={book.name}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
+          layout
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{
+            duration: 0.25,
+            ease: [0.4, 0, 0.2, 1],
+            scale: { type: "spring", stiffness: 200 },
+          }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           <Book book={book} />
         </motion.div>

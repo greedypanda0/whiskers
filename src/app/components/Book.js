@@ -17,7 +17,9 @@ function Book({ book }) {
         href={`/books/${slugify(book.name)}`}
         aria-label={`View Book ${book.name}`}
       >
-        <div className="group flex flex-col bg-[var(--muted)] overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)] hover:scale-101 active:scale-95 aspect-[150/250] rounded-md">
+        <div
+          className="group relative flex flex-col bg-[var(--secondary)] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 rounded-xl w-full max-w-[240px] focus:outline-none focus:ring-2 focus:ring-[var(--ring)] aspect-[2/3]"
+        >
           <div className="relative w-full h-full overflow-hidden flex">
             <div className="w-[90%] h-full ml-auto">
               <Avatar name={book.name} />
