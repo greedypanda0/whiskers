@@ -33,7 +33,7 @@ export default function ListBooks({ books }) {
 
   return (
     <div
-      className="grid grid-cols-[repeat(auto-fit,minmax(120px,max-content))] sm:grid-cols-[repeat(auto-fit,minmax(150px,max-content))] lg:grid-cols-[repeat(auto-fit,minmax(180px,max-content))] auto-rows-min w-full h-fit gap-4 p-2 sm:p-4"
+      className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] sm:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] auto-rows-min w-full h-fit gap-4 p-2 sm:p-4"
     >
       {books.slice(0, visibleCount).map((book) => (
         <motion.div

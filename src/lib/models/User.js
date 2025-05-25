@@ -11,6 +11,7 @@ const User = new Schema({
   },
 
   books: [],
+  star: [],
 });
 
 export default models.users || model("users", User);
