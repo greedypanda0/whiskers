@@ -14,9 +14,6 @@ const BookSchema = new Schema({
     type: String,
     required: true,
   },
-  pages: {
-    default: [],
-  },
 });
 
 export default models.books || model("books", BookSchema);

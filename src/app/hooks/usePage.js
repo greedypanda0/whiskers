@@ -1,24 +1,22 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-export default function useBook({ name }) {
-  const [book, setBook] = useState({});
+export default function usePage({ name, index }) {
+  const [page, setPage] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  console.log("name", name);
-  
   useEffect(() => {
     const fetchBooks = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/books/${name.replaceAll("-", " ")}`);
+        const res = await fetch(`/api/books/${name.replaceAll("-", " ")}/pages/${index}`);
         const data = await res.json();
 
         if (!data.success) {
           setError("Unable to get book");
         } else {
-          setBook(data.book || {});
+          setPage(data.page || {});
         }
       } catch (err) {
         setError("Fetch failed");
@@ -27,9 +25,9 @@ export default function useBook({ name }) {
       }
     };
 
-    if (!name) return;
+    if (!index) return;
     fetchBooks();
-  }, [name]);
+  }, [index]);
 
-  return { book, error, isLoading };
+  return { page, error, isLoading };
 }

@@ -6,7 +6,7 @@ export default function useBooks({ self = false, args = {} }) {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { data: session } = useSession();
-  const name = session?.user?.name;
+  const name = session?.user?.auth_name;
 
   useEffect(() => {
     const fetchBooks = async () => {

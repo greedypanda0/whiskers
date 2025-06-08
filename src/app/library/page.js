@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import clsx from "clsx";
 import Stared from "../components/Stared";
@@ -9,6 +9,7 @@ import { BookA, Plus, Search, Star } from "lucide-react";
 import useStore from "@/lib/store";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import Main from "../components/Main";
 
 const tabs = [
   {
@@ -16,18 +17,22 @@ const tabs = [
     component: MyBooks,
     icon: BookA,
   },
-  {
-    name: "Stared",
-    component: Stared,
-    icon: Star,
-  },
 ];
 
 export default function Library() {
   const [tab, setTab] = useState("My Books");
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const [input, setInput] = useState("");
   const { setQuery } = useStore();
   const router = useRouter();
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setQuery(input.trim());
+    }, 1000);
+
+    return () => clearTimeout(handler);
+  }, [input, setQuery]);
 
   async function handleNewBook() {
     let res = await fetch("/api/books", {
@@ -38,13 +43,11 @@ export default function Library() {
       body: JSON.stringify({}),
     }).then((res) => res.json());
 
-    console.log(res);
-
-    return router.push(`books/${res.name}`);
+    return router.push(`books/${res.name}/edit`);
   }
 
   return (
-    <main className="fixed flex flex-col md:flex-row w-full h-full">
+    <Main>
       <div className="flex flex-col w-full h-full">
         {/* Tabs */}
         <div className="w-full h-16 flex flex-row items-center justify-evenly">
@@ -77,7 +80,8 @@ export default function Library() {
               type="text"
               placeholder="(#-#)^"
               className="flex px-2 py-1 bg-[var(--primary)] outline-0 rounded-l-full text-[var(--primary-foreground)] w-full text-sm"
-              onChange={(e) => setQuery(e.target.value.trim())}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
             />
           </motion.div>
 
@@ -118,7 +122,6 @@ export default function Library() {
           </AnimatePresence>
         </div>
       </div>
-      <Footer />
-    </main>
+    </Main>
   );
 }

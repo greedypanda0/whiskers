@@ -5,7 +5,7 @@ const PageSchema = new Schema({
     type: Number,
     required: true,
   },
-  Book: {
+  book: {
     type: String,
     ref: "books",
     required: true,

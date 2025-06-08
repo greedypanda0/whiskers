@@ -1,20 +1,20 @@
 "use client";
 
-import { signIn, signOut } from "next-auth/react";
-import Footer from "./components/Footer";
-import Top from "./components/Top";
+import { useState } from "react";
+import useBooks from "./hooks/useBooks";
+import ListBooks from "./components/ListBooks";
+import Main from "./components/Main";
 
-export default function Home() {
+export default function SearchPage() {
+  const [input, setInput] = useState("");
+  const [query, setQuery] = useState("");
+  const { books, error, isLoading } = useBooks({
+    args: {},
+  });
+
   return (
-    <main className="fixed flex flex-col md:flex-row w-full h-full ">
-      <div className="flex flex-col w-full h-full">
-        <Top />
-        <div className="w-full h-full flex flex-col">
-          <div onClick={() => signIn()}>SignIn</div>
-          <div onClick={() => signOut()}>Sign OUT</div>
-        </div>
-      </div>
-      <Footer />
-    </main>
+    <Main>
+      <ListBooks books={books} />
+    </Main>
   );
 }

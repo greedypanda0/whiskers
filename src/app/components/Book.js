@@ -4,6 +4,8 @@ import Avatar from "./Avatar";
 import { memo } from "react";
 
 function Book({ book }) {
+  console.log(book);
+  
   return (
     <motion.div
       layout
@@ -14,7 +16,7 @@ function Book({ book }) {
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <Link
-        href={`/books/${slugify(book.name)}`}
+        href={`/books/${book.name}`}
         aria-label={`View Book ${book.name}`}
       >
         <div
@@ -43,11 +45,5 @@ function Book({ book }) {
     </motion.div>
   );
 }
-
-const slugify = (str) =>
-  str
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]/g, "");
 
 export default memo(Book);
