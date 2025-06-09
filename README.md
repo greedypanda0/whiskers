@@ -34,7 +34,7 @@ Whiskers is a full-featured book and blog writing application. Built with Next.j
    Create a `.env` file in the root directory with the following variables:
 
    ```
-   MONGO_URI=your_mongo_connection_string
+   MONGODB_URI=your_mongo_connection_string
    NEXTAUTH_URL=your_deployed_app_url
    NEXTAUTH_SECRET=your_next_auth_secret
    GOOGLE_CLIENT_ID=your_google_client_id
@@ -51,7 +51,7 @@ Whiskers is a full-featured book and blog writing application. Built with Next.j
    yarn dev
    ```
 
-   The app will be available at [http://localhost:3000]( blog, organize chapters or posts, and publish or share as you like.
+   The app will be available at [http://localhost:3000](blog, organize chapters or posts, and publish or share as you like.)
 - Easily deploy and host your own instance for personal or community use.
 
 ## Who is it for?
