@@ -68,7 +68,7 @@ Whiskers is a full-featured book and blog writing application. Built with Next.j
 
 ## License
 
-MIT
+This project is licensed under the [MIT License](./LICENSE).
 
 ## Contribution 
 - **Open to any type of Contribution**
